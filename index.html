@@ -186,8 +186,8 @@ const SERVICES = [
 ];
 
 const PRESETS = [
-  { id: "prezutie", name: "🔄  Kompletné prezutie", services: ["demontaz", "montaz", "vyzuvanie", "obuvanie", "vyvazovanie", "umyvanie"] },
-  { id: "vymena", name: "🛞  Výmena diskov", services: ["demontaz", "montaz"] },
+  { id: "prezutie", name: "Kompletné prezutie", services: ["demontaz", "montaz", "vyzuvanie", "obuvanie", "vyvazovanie", "umyvanie"] },
+  { id: "vymena", name: "Výmena diskov", services: ["demontaz", "montaz"] },
 ];
 
 const PRICES = {
@@ -335,19 +335,21 @@ function ServiceToggle({ service, active, price, qty, onToggle }) {
 
 function PresetButtons({ onSelect, activePreset }) {
   return (
-    <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+    <div style={{ display: "flex", gap: 8, flexWrap: "nowrap" }}>
       {PRESETS.map((p) => (
         <button
           key={p.id}
           className="press-scale"
           onClick={() => { haptic.medium(); onSelect(p); }}
           style={{
-            padding: "8px 16px", borderRadius: 20,
+            flex: 1, minWidth: 0,
+            padding: "8px 10px", borderRadius: 20,
             border: activePreset === p.id ? `2px solid ${T.accent}` : `2px solid ${T.grayMuted}`,
             background: activePreset === p.id ? T.accentDim : "transparent",
             fontSize: 13, fontWeight: 600, cursor: "pointer",
             color: activePreset === p.id ? T.accent : T.grayLight,
             fontFamily: T.font, transition: "all 0.15s",
+            whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
           }}
         >
           {p.name}
